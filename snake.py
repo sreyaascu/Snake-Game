@@ -8,10 +8,14 @@ pg.display.set_caption("Snake Game")
 playing = True
 
 clock = pg.time.Clock()
-test_surface = pg.Surface((50,50))
+#test_surface = pg.Surface((50,50))
+
 x_pos = 300
 y_pos = 200
 
+snake = pg.Rect(x_pos,y_pos,50,50);
+
+snake_color = (70,120,210)
 
 
 
@@ -42,43 +46,42 @@ while playing:
     screen.fill((175,215,70))
         
     if up:
-        y_pos -= 5
-        if y_pos >= 600 or y_pos <=0:
-            y_pos = 200
-            x_pos = 300
+        snake.y-= 5
+        if snake.y >= 600 or snake.y <=0:
+            snake.y = 200
+            snake.x = 300
             up = False        
     elif down:
-        y_pos += 5
+        snake.y += 5
 
-        if y_pos >= 550 or y_pos <=0:
-            y_pos = 200
-            x_pos = 300
+        if snake.y >= 550 or snake.y <=0:
+            snake.y = 200
+            snake.x = 300
             down = False
     elif right:
-        x_pos += 5
+        snake.x += 5
 
-        if x_pos >= 750 or x_pos<=0:
-            y_pos = 200
-            x_pos = 300
+        if snake.x >= 750 or snake.x <= 0:
+            snake.y = 200
+            snake.x = 300
             right = False
     elif left:
-        x_pos -= 5
+        snake.x -= 5
 
-        if x_pos >= 800 or x_pos<=0:
-            y_pos = 200
-            x_pos = 300
+        if snake.x >= 800 or snake.x <= 0:
+            snake.y = 200
+            snake.x = 300
             left = False
 
 
-
-    screen.blit(test_surface,(x_pos,y_pos))
     
-
+    
+    pg.draw.rect(screen,snake_color,snake)
 
 
 
     pg.display.update()
 
-    test_surface.fill((70,120,210))
+   # test_surface.fill((70,120,210))
     clock.tick(60) # loop runs max 60 times in a sec 
 
