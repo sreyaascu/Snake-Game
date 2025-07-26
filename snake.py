@@ -7,25 +7,27 @@ playing = True
 
 clock = pg.time.Clock()
 #test_surface = pg.Surface((50,50))
+ct = 0
 
 x_pos = 300
 y_pos = 200
-
+f_x = 500
+f_y = 100
 block_size = 50
 
-food = pg.Rect()
+food = pg.Rect(f_x,f_y,50,50)
 snake_rect = pg.Rect(x_pos,y_pos,50,50);         #x_pos and y_pos are the coordinates and 50 - 50 are the size
 food_color = (170,70,30)
 snake_color = (70,120,210)
-global food
-food = None 
+
+food_ini = True
 
 def random_x():
-    x_cord = rd.randrange(0,751,5)
+    x_cord = rd.randrange(0,751,50)
     return x_cord
 
 def random_y():
-    y_cord = rd.randrange(0,551,5)
+    y_cord = rd.randrange(0,551,50)
     return y_cord
 
 left=right=up=down = False
@@ -35,6 +37,10 @@ growing = False
 moving = False
 while playing:
     screen.fill(bg_color)
+
+    if food_ini:
+        pg.draw.rect(screen,food_color,food)
+        ct=1
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -67,8 +73,12 @@ while playing:
             new_head.y -= block_size
             snake.insert(0,new_head)
 
-            if not growing:
+            if not snake[0].colliderect(food):
                 snake.pop()
+            else:
+                food_ini = False
+                food = pg.Rect(random_x(),random_y(),50,50)
+                food_ini = True
             for i in snake:
                 pg.draw.rect(screen,snake_color,i)
 
@@ -78,8 +88,14 @@ while playing:
             new_head = snake[0].copy()
             new_head.y += block_size
             snake.insert(0,new_head)
-            if not growing:
+            if not snake[0].colliderect(food):
+
                 snake.pop()
+                
+            else:
+                food_ini = False
+                food = pg.Rect(random_x(),random_y(),50,50)
+                food_ini = True
             for i in snake:
                 pg.draw.rect(screen,snake_color,i)
         
@@ -89,8 +105,15 @@ while playing:
             new_head.x += block_size
             snake.insert(0,new_head)
             
-            if not growing:
+            if not snake[0].colliderect(food):
+
                 snake.pop()
+
+            else:
+                food_ini = False
+                food = pg.Rect(random_x(),random_y(),50,50)
+                food_ini = True
+
             for i in snake:
                 pg.draw.rect(screen,snake_color,i)
         
@@ -100,9 +123,15 @@ while playing:
             new_head.x -= block_size
             snake.insert(0,new_head)
             
-            if not growing:
+            if not snake[0].colliderect(food):
+ 
                 snake.pop()
 
+            else:
+                food_ini = False
+
+                food = pg.Rect(random_x(),random_y(),50,50)
+                food_ini = True
             for i in snake:
                 pg.draw.rect(screen,snake_color,i)
 
