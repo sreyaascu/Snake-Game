@@ -1,6 +1,5 @@
 import pygame as pg
 import random as rd
-
 ct=0
 pg.init()
 screen = pg.display.set_mode((800,600))
