@@ -13,6 +13,7 @@ y_pos = 200
 
 block_size = 50
 
+food = pg.Rect()
 snake_rect = pg.Rect(x_pos,y_pos,50,50);         #x_pos and y_pos are the coordinates and 50 - 50 are the size
 food_color = (170,70,30)
 snake_color = (70,120,210)
