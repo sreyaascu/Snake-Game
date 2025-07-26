@@ -1,6 +1,6 @@
 import pygame as pg
 import random as rd
-
+global growing
 ct=0
 pg.init()
 screen = pg.display.set_mode((800,600))
@@ -29,17 +29,13 @@ def random_y():
     y_cord = rd.randrange(0,551,5)
     return y_cord
 
-ini = 0
 left=right=up=down = False
 bg_color = (175,215,70)
 snake = [snake_rect]
-pg.draw.rect(screen,snake_color,snake[0])
 growing = False
-
+moving = False
 while playing:
     screen.fill(bg_color)
-    if ini==0:
-        pg.draw.rect(screen,snake_color,snake[0])
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -48,49 +44,78 @@ while playing:
 
             if event.key == pg.K_DOWN:
                 down = True
+                moving = True
                 left = right = up = False
             elif event.key == pg.K_UP:
                 up = True
+                moving = True
                 down = right = left = False
             elif event.key == pg.K_RIGHT:
                 right = True
+                moving = True
                 left = up = down = False
             elif event.key == pg.K_LEFT:
                 left = True
+                moving = True
                 right = up = down = False
 
 
+    if moving:
 
-    
-    new_head = snake[0].copy()
-    snake.insert(0,new_head)
-    if up:
+        if up:
+
+            new_head = snake[0].copy()
+            new_head.y -= block_size
+            snake.insert(0,new_head)
+
+            if not growing:
+                snake.pop()
+            for i in snake:
+                pg.draw.rect(screen,snake_color,i)
+
+
+
+        elif down:
+            new_head = snake[0].copy()
+            new_head.y += block_size
+            snake.insert(0,new_head)
+            if not growing:
+                snake.pop()
+            for i in snake:
+                pg.draw.rect(screen,snake_color,i)
+        
+        elif right:
             
-        if not growing:
-           snake.pop()
-           for i in snake:
-               i.y-=block_size
-               pg.draw.rect(screen,snake_color,i)
-        else:
+            new_head = snake[0].copy()
+            new_head.x += block_size
+            snake.insert(0,new_head)
+            
+            if not growing:
+                snake.pop()
             for i in snake:
-                i.y-=block_size
+                pg.draw.rect(screen,snake_color,i)
+        
+        elif left:
+
+            new_head = snake[0].copy()
+            new_head.x -= block_size
+            snake.insert(0,new_head)
+            
+            if not growing:
+                snake.pop()
+
+            for i in snake:
                 pg.draw.rect(screen,snake_color,i)
 
-    elif down:
-        if not growing:
-            snake.pop()
-            for i in snake:
-                i.y+=block_size
-                pg.draw.rect(screen,snake_color,i)
-        else:
-            for i in snake:
-                i.y+=block_size
-                pg.draw.rect(screen,snake_color,i)
 
 
-    
+    else:
+        pg.draw.rect(screen,snake_color,snake[0])
+
+
     pg.display.update()
-    clock.tick(6)
+
+    clock.tick(4)
 
 
 
