@@ -143,7 +143,7 @@ while playing:
 
     pg.display.update()
 
-    clock.tick(4)
+    clock.tick(7)
 
 
 
