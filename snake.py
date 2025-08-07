@@ -31,6 +31,7 @@ def random_y():
     y_cord = rd.randrange(0,551,50)
     return y_cord
 
+
 left=right=up=down = False
 bg_color = (175,215,70)
 snake = [snake_rect]
@@ -145,7 +146,6 @@ while playing:
     pg.display.update()
 
     clock.tick(7)
-
 
 
 
