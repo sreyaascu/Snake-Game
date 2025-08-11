@@ -9,7 +9,7 @@ playing = True
 clock = pg.time.Clock()
 #test_surface = pg.Surface((50,50))
 ct = 0
-
+print('madhav is a good boy')
 x_pos = 300
 y_pos = 200
 f_x = 500
