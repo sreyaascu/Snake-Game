@@ -14,11 +14,12 @@ y_pos = 200
 f_x = 500
 f_y = 100
 bs = 50
+grad = 40
 
 food = pg.Rect(f_x,f_y,bs,bs)
 snake_rect = pg.Rect(x_pos,y_pos,50,50);         #x_pos and y_pos are the coordinates and 50 - 50 are the size
 food_color = (170,70,30)
-snake_color = (70,120,210)
+snake_color = (30,grad,255)
 
 food_ini = True
 
@@ -38,7 +39,7 @@ growing = False
 moving = False
 while playing:
     screen.fill(bg_color)
-
+    grad = 40
     if food_ini:
         pg.draw.rect(screen,food_color,food)
         ct=1
@@ -79,9 +80,7 @@ while playing:
 
 
     if moving:
-
         if up:
-
             new_head = snake[0].copy()
             new_head.y -= bs
             snake.insert(0,new_head)
@@ -93,7 +92,10 @@ while playing:
                 food = pg.Rect(random_x(),random_y(),50,50)
                 food_ini = True
             for i in snake:
+                snake_color = (30,grad,255) 
+                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
+                grad += 4 
 
 
 
@@ -110,7 +112,10 @@ while playing:
                 food = pg.Rect(random_x(),random_y(),50,50)
                 food_ini = True
             for i in snake:
+                snake_color = (30,grad,255) 
+                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
+                grad += 4
         
         elif right:
             
@@ -128,7 +133,10 @@ while playing:
                 food_ini = True
 
             for i in snake:
+                snake_color = (30,grad,255) 
+                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
+                grad += 4
         
         elif left:
 
@@ -137,7 +145,6 @@ while playing:
             snake.insert(0,new_head)
             
             if not snake[0].colliderect(food):
- 
                 snake.pop()
 
             else:
@@ -146,11 +153,16 @@ while playing:
                 food = pg.Rect(random_x(),random_y(),50,50)
                 food_ini = True
             for i in snake:
+                snake_color = (30,grad,255) 
+                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
+                grad += 4 
 
 
 
     else:
+        grad = 40
+        snake_color = (30,40,255)
         pg.draw.rect(screen,snake_color,snake[0])
     
     if ((snake[0].x > 750) or (snake[0].x < 0)) or ((snake[0].y ) > 550 or (snake[0].y < 0)):
