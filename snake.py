@@ -13,9 +13,9 @@ x_pos = 300
 y_pos = 200
 f_x = 500
 f_y = 100
-block_size = 50
+bs = 50
 
-food = pg.Rect(f_x,f_y,50,50)
+food = pg.Rect(f_x,f_y,bs,bs)
 snake_rect = pg.Rect(x_pos,y_pos,50,50);         #x_pos and y_pos are the coordinates and 50 - 50 are the size
 food_color = (170,70,30)
 snake_color = (70,120,210)
@@ -56,7 +56,7 @@ while playing:
                     left=up=right = False
                     moving = True 
             elif event.key == pg.K_UP:
-                if down!=True:
+                if down==False:
                     up = True
                     moving = True
                     down = right = left = False
@@ -83,7 +83,7 @@ while playing:
         if up:
 
             new_head = snake[0].copy()
-            new_head.y -= block_size
+            new_head.y -= bs
             snake.insert(0,new_head)
 
             if not snake[0].colliderect(food):
@@ -99,7 +99,7 @@ while playing:
 
         elif down:
             new_head = snake[0].copy()
-            new_head.y += block_size
+            new_head.y += bs
             snake.insert(0,new_head)
             if not snake[0].colliderect(food):
 
@@ -115,7 +115,7 @@ while playing:
         elif right:
             
             new_head = snake[0].copy()
-            new_head.x += block_size
+            new_head.x += bs
             snake.insert(0,new_head)
             
             if not snake[0].colliderect(food):
@@ -133,7 +133,7 @@ while playing:
         elif left:
 
             new_head = snake[0].copy()
-            new_head.x -= block_size
+            new_head.x -= bs
             snake.insert(0,new_head)
             
             if not snake[0].colliderect(food):
@@ -152,7 +152,15 @@ while playing:
 
     else:
         pg.draw.rect(screen,snake_color,snake[0])
+    
+    if ((snake[0].x > 750) or (snake[0].x < 0)) or ((snake[0].y ) > 550 or (snake[0].y < 0)):
 
+        while (len(snake)==1):
+            snake.pop()
+        snake_rect = pg.Rect(x_pos,y_pos,50,50)
+        snake = [snake_rect]
+        up=right=down=left = False
+        moving = False
 
     pg.display.update()
 
