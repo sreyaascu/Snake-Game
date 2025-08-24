@@ -93,9 +93,8 @@ while playing:
                 food_ini = True
             for i in snake:
                 snake_color = (30,grad,255) 
-                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
-                grad += 4 
+                grad += 5 
 
 
 
@@ -113,9 +112,8 @@ while playing:
                 food_ini = True
             for i in snake:
                 snake_color = (30,grad,255) 
-                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
-                grad += 4
+                grad += 5
         
         elif right:
             
@@ -134,9 +132,8 @@ while playing:
 
             for i in snake:
                 snake_color = (30,grad,255) 
-                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
-                grad += 4
+                grad += 5
         
         elif left:
 
@@ -154,9 +151,8 @@ while playing:
                 food_ini = True
             for i in snake:
                 snake_color = (30,grad,255) 
-                print(snake_color," ",grad)
                 pg.draw.rect(screen,snake_color,i)
-                grad += 4 
+                grad += 5 
 
 
 
