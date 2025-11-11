@@ -49,28 +49,28 @@ while playing:
             playing = False
         elif event.type == pg.KEYDOWN:
 
-            if event.key == pg.K_DOWN:
+            if (event.key == pg.K_DOWN or event.key == pg.K_s):
                 if up==True:
                     continue
                 elif up==False:
                     down = True
                     left=up=right = False
                     moving = True 
-            elif event.key == pg.K_UP:
+            elif (event.key == pg.K_UP or event.key == pg.K_w):
                 if down==False:
                     up = True
                     moving = True
                     down = right = left = False
                 elif down==True:
                     continue
-            elif event.key == pg.K_RIGHT:
+            elif (event.key == pg.K_RIGHT or event.key == pg.K_d):
                 if left==True:
                     continue
                 elif left==False:
                     right = True
                     up=down=left = False
                     moving = True
-            elif event.key == pg.K_LEFT:
+            elif (event.key == pg.K_LEFT or event.key == pg.K_a):
                 if right == False:
                     left = True
                     moving = True
